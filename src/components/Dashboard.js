@@ -9,7 +9,7 @@ const Dashboard = () => {
     // Fetch moods from the backend
     const fetchMoods = async () => {
         try {
-            const response = await axios.get("http://localhost:8080");
+            const response = await axios.get("https://backend-mood.onrender.com");
             setMoods(response.data);
         } catch (error) {
             console.error("Error fetching moods:", error);
@@ -23,7 +23,7 @@ const Dashboard = () => {
     // Add a new mood
     const addMood = async (mood) => {
         try {
-            const response = await axios.post("http://localhost:8080", mood);
+            const response = await axios.post("https://backend-mood.onrender.com", mood);
             setMoods([...moods, response.data]);
         } catch (error) {
             console.error("Error adding mood:", error);

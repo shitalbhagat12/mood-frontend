@@ -7,7 +7,7 @@ const History = () => {
     // Fetch all moods from the backend
     const fetchMoods = async () => {
         try {
-            const response = await axios.get("http://localhost:8080");
+            const response = await axios.get("https://backend-mood.onrender.com");
             setMoods(response.data);
         } catch (error) {
             console.error("Error fetching moods:", error);
@@ -17,7 +17,7 @@ const History = () => {
     // Delete a mood
     const deleteMood = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/${id}`);
+            await axios.delete(`https://backend-mood.onrender.com/${id}`);
             setMoods(moods.filter((mood) => mood._id !== id));
         } catch (error) {
             console.error("Error deleting mood:", error);
