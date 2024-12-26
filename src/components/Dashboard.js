@@ -17,7 +17,7 @@ const Dashboard = () => {
         try {
             const decodedToken = jwtDecode(token);
             const userId = decodedToken.id;
-            const response = await axios.get(`http://localhost:8080/${userId}`, {
+            const response = await axios.get(`https://mood-explore-backend.onrender.com/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -43,7 +43,7 @@ const Dashboard = () => {
         const userId = decodedToken.id;
 
         try {
-            const response = await axios.post("http://localhost:8080", {
+            const response = await axios.post("https://mood-explore-backend.onrender.com", {
                 user_id: userId,
                 mood: mood.mood,
                 message: mood.message // Ensure message is included
