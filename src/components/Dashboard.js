@@ -17,7 +17,7 @@ const Dashboard = () => {
         try {
             const decodedToken = jwtDecode(token);
             const userId = decodedToken.id;
-            const response = await axios.get(`https://mood-explore-backend.onrender.com/${userId}`, {
+            const response = await axios.get(`https://mood-backend-h9i4.onrender.com/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -43,7 +43,7 @@ const Dashboard = () => {
         const userId = decodedToken.id;
 
         try {
-            const response = await axios.post("https://mood-explore-backend.onrender.com", {
+            const response = await axios.post("https://mood-backend-h9i4.onrender.com", {
                 user_id: userId,
                 mood: mood.mood,
                 message: mood.message // Ensure message is included
@@ -54,6 +54,7 @@ const Dashboard = () => {
               });
             setMoods([...moods, response.data]);
             console.log('Mood added:', response.data);
+            fetchMoods();
         } catch (error) {
             console.error("Error adding mood:", error);
             if (error.response) {

@@ -15,7 +15,7 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('https://mood-explore-backend.onrender.com/api/users/login', {
+      const response = await axios.post('https://mood-backend-h9i4.onrender.com/api/users/login', {
         email,
         password,
       });

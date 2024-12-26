@@ -1,5 +1,5 @@
 import React from 'react';
-import './HomePage.css'; // Make sure to create and style this CSS file
+import './HomePage.css'; 
 import Navbar from './navbar1';
 import { useNavigate } from 'react-router-dom';
 const HomePage = () => {
