@@ -1,84 +1,64 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import "./Login.css";
+import React, { useState } from 'react';
+import Navbar from './navbar'; 
+import Footer from './Footer';
+import './Signup.css'; 
+import './Login.css'; 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validation
-    if (!firstName || !lastName || !email || !password) {
-      setError("All fields are required.");
-      return;
+    try {
+      const response = await axios.post('http://localhost:8080/api/users/login', {
+        email,
+        password,
+      });
+      localStorage.setItem('token', response.data.token); 
+      alert('Login successful!');
+      navigate('/dashboard');
+    } catch (error) {
+      alert(error.response.data.error);
     }
-
-    if (!/\S+@\S+\.\S+/.test(email)) {
-      setError("Invalid email format.");
-      return;
-    }
-
-    setError("");
-    // Signup logic (can be extended further)
-    alert("Signup successful!");
-    navigate("/dashboard");
   };
 
   return (
-    <div className="login-container">
-      <form className="login-form" onSubmit={handleSubmit}>
-        <h1>Create an account</h1>
-        <p>
-          Already have an account? <span className="link">Log in</span>
-        </p>
-        {error && <div className="error-message">{error}</div>}
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="First name"
-            value={firstName}
-            onChange={(e) => setFirstName(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
-          <input
-            type="text"
-            placeholder="Last name"
-            value={lastName}
-            onChange={(e) => setLastName(e.target.value)}
-          />
-        </div>
-        <div className="form-group">
+    <>
+
+    <div className="login-page">
+      
+      <div className="login-right">
+        <form onSubmit={handleSubmit} className="signup-form">
+          <h2>Welcome Back to MoodMoon<span>👋</span></h2>
+          <p>Please Login with your details here</p>
           <input
             type="email"
             placeholder="Email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            required
           />
-        </div>
-        <div className="form-group">
           <input
             type="password"
-            placeholder="Enter your password"
+            placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            required
+            autoComplete='true'
           />
-        </div>
-        <div className="form-group terms">
-          <input type="checkbox" id="terms" />
-          <label htmlFor="terms">I agree to the Terms & Conditions</label>
-        </div>
-        <button type="submit" className="create-account-btn">
-          Create account
-        </button>
-      </form>
+          <button type="submit" className="signup-button">Login</button>
+          <p>If you don't have account <Link to="/signup" className="btn">SignUp</Link></p>
+        </form>
+      </div>
     </div>
+    <Footer />
+  </>
+    
   );
 };
 

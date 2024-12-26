@@ -15,7 +15,7 @@ const MoodForm = ({ onAddMood }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Submit Your Mood</h2>
+      <h2 id="sub">Submit Your Mood</h2>
       <textarea
         value={message}
         onChange={(e) => setMessage(e.target.value)}

@@ -2,14 +2,26 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import MoodForm from "./MoodForm";
 import { Link } from "react-router-dom";
-
+import './HomePage.css';
+import Navbar from "./navbar";
+import { jwtDecode } from 'jwt-decode'; 
 const Dashboard = () => {
     const [moods, setMoods] = useState([]);
 
     // Fetch moods from the backend
     const fetchMoods = async () => {
+        const token = localStorage.getItem('token');
+        if (!token) return;
+
+
         try {
-            const response = await axios.get("https://backend-mood.onrender.com");
+            const decodedToken = jwtDecode(token);
+            const userId = decodedToken.id;
+            const response = await axios.get(`http://localhost:8080/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            });
             setMoods(response.data);
         } catch (error) {
             console.error("Error fetching moods:", error);
@@ -22,21 +34,49 @@ const Dashboard = () => {
 
     // Add a new mood
     const addMood = async (mood) => {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          return;
+        }
+
+        const decodedToken = jwtDecode(token); 
+        const userId = decodedToken.id;
+
         try {
-            const response = await axios.post("https://backend-mood.onrender.com", mood);
+            const response = await axios.post("http://localhost:8080", {
+                user_id: userId,
+                mood: mood.mood,
+                message: mood.message // Ensure message is included
+            },{
+                headers: {
+                  Authorization: `Bearer ${token}`,
+                },
+              });
             setMoods([...moods, response.data]);
+            console.log('Mood added:', response.data);
         } catch (error) {
             console.error("Error adding mood:", error);
+            if (error.response) {
+                if (error.response.data) {
+                  alert(error.response.data.error || 'An error occurred while logging your workout.');
+                  console.log(error.response.data);
+                  console.log(error.response.status, error.response.data.error || 'An error occurred while logging your workout.');
+                } else {
+                  alert('An error occurred: ' + error.message);
+                }
+              } else {
+                alert('Network error or server not reachable. Please try again.');
+              }
         }
     };
 
 
     // Get the latest mood
-    const latestMood = moods.length > 0 ? moods[moods.length - 1] : null;
+    const latestMood = moods.length > 0 ? moods[0] : null;
 
     return (
-        <div>
-            <h1>Dashboard</h1>
+        <div className="bg">
+            <Navbar />
             <MoodForm onAddMood={addMood} />
             <div>
                 <h2>Latest Mood</h2>
@@ -58,9 +98,6 @@ const Dashboard = () => {
                     <p>No mood to display</p>
                 )}
             </div>
-            <Link to="/history">
-                <button>View Mood History</button>
-            </Link>
         </div>
     );
 };

@@ -1,0 +1,72 @@
+.bg {
+    background-color: transparent;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+#MH {
+    text-align: center;
+    color: #262558;
+    font-family: "Comfortaa";
+    font-size: 50px;
+}
+#HH{
+    color: #262558;
+    font-family: "Comfortaa";
+    font-size: 20px;
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+h4{
+    font-size: 20px;
+}
+#one{
+    color: #262558;
+}
+#one1{
+    color: #262558;
+    font-size: 25px;
+}
+li {
+    background-color: transparent;
+    border: 1px solid #ddd;
+    border-radius:20px;
+    margin: 10px 0;
+    padding: 15px;
+    position: relative;
+    z-index: 1;
+    box-shadow: 0 10px 8px rgba(0, 0, 0, 0.1);
+    color:#262558
+}
+li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 10px rgba(0, 0, 0, 0.15);
+}
+
+h3 {
+    margin: 0;
+    color: #555;
+}
+
+p {
+    margin: 5px 0;
+    color: #666;
+}
+
+button{
+    padding: 10px 20px;
+    background-color: #fafffb;
+    color: rgb(3, 3, 3);
+    border: none;
+    border-radius: 20px;
+    box-shadow: 0 0 10px #f7f7f9, 0 0 10px #ededf0, 0 0 10px #f9f9fa, 0 0 10px #efeff3;
+    border: 2px solid #6f6da6;
+}
+ #D{
+    color: #262558;
+    font-size: 15px;
+    font-weight: bold;
+    
+ }

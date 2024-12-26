@@ -5,7 +5,8 @@
     font-family: Arial, sans-serif;
     text-align: center;
     padding: 20px;
-    height: 100vh;
+    height: 75vh;
+
 }
 
 .header {
@@ -17,7 +18,10 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     border-radius: 10px;
     z-index: 1;
-
+    position: sticky;
+    top: 0;
+    width: 100%;
+    
 }
 
 .logo {
@@ -29,6 +33,7 @@
 .logo img {
     height: 50px;
     margin-right: 10px;
+    border-radius: 50%;
 }
 
 .nav-buttons button {
@@ -40,6 +45,7 @@
     background-color: transparent ;
     font-size: 20px;
     background-color: #2f2d5d;
+    box-shadow: none;
 }
 
 .nav-buttons button:hover {
@@ -88,9 +94,7 @@
     margin-top: 80px;
     
 }
-/* .description button:hover {
-    
-} */
+
 
 .gif img {
     max-width: 100%;
