@@ -17,7 +17,7 @@ const Dashboard = () => {
         try {
             const decodedToken = jwtDecode(token);
             const userId = decodedToken.id;
-            const response = await axios.get(`https://mood-backend-h9i4.onrender.com/${userId}`, {
+            const response = await axios.get(`https://mood-backend-870r.onrender.com/${userId}`, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },
@@ -43,7 +43,7 @@ const Dashboard = () => {
         const userId = decodedToken.id;
 
         try {
-            const response = await axios.post("https://mood-backend-h9i4.onrender.com", {
+            const response = await axios.post("https://mood-backend-870r.onrender.com", {
                 user_id: userId,
                 mood: mood.mood,
                 message: mood.message // Ensure message is included
@@ -79,10 +79,10 @@ const Dashboard = () => {
         <div className="bg">
             <Navbar />
             <MoodForm onAddMood={addMood} />
-            <div>
-                <h2>Latest Mood</h2>
+            <div className="result-container">
+                <h2>Current Mood</h2>
                 {latestMood ? (
-                    <ul>
+                    <ul className="mood">
                         <li key={latestMood._id}>
                             <h3>Mood: {latestMood.mood}</h3>
                             <p>Message: {latestMood.message}</p>
