@@ -12,7 +12,7 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:8080/api/users/signup', {
+      const response = await axios.post('https://mood-backend-870r.onrender.com/api/users/signup', {
         name,
         email,
         password,
